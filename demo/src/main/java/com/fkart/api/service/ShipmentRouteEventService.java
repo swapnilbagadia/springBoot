@@ -22,19 +22,21 @@ public class ShipmentRouteEventService {
     @Autowired
     private ShipmentRouteEventMapper shipmentRouteEventMapper;
 
-    public List<ShipmentRouteEventDto> getAllData(){
+    public List<ShipmentRouteEventDto> getAllData() {
         return shipmentRouteEventMapper.toDtoList(shipmentRouteEventRepository.findAll());
     }
 
-    public ShipmentRouteEventDto getData(Long routeEventId){
+    public ShipmentRouteEventDto getData(Long routeEventId) {
         return shipmentRouteEventMapper.toDto(shipmentRouteEventRepository.findOne(routeEventId));
     }
 
 
-    public void updateShipmentRouteEvent(ShipmentRouteEventDto shipmentRouteEventDto){
+    public void updateShipmentRouteEvent(ShipmentRouteEventDto shipmentRouteEventDto) {
         ShipmentRouteEvent event = shipmentRouteEventRepository.findOne(shipmentRouteEventDto.getRouteEventId());
-        event = shipmentRouteEventMapper.updateEntity(event,shipmentRouteEventDto);
-        shipmentRouteEventRepository.save(event);
+        if (event != null) {
+            event = shipmentRouteEventMapper.updateEntity(shipmentRouteEventDto, event);
+            shipmentRouteEventRepository.save(event);
+        }
     }
 
 
