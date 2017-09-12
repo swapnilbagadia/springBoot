@@ -1,0 +1,16 @@
+spring:
+    profiles.active: ${demoProfile}
+    application:
+        name: demo
+    jpa:
+        hibernate:
+            ddl-auto: none
+            dialect: org.hibernate.dialect.MySQL5Dialect
+            naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+---
+spring:
+    profiles: dev
+    datasource:
+        url: jdbc:mysql://localhost:3306/springbootdb?useSSL=false
+        username: root
+        password: root
